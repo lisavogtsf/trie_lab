@@ -14,13 +14,16 @@ if (Trie.find("a"/prefix)){
   Other case
   AllWordsInTrie = trie.GetWords
   Test allwordintrie, do they include the prefix? Loop
-    If (include prefix) {
+     TestTrie = new Trie
+      Testtirie.learn(one word in trie, current loop)
+      TestTrie.find(prefix)
+    If (TestTrie.find(prefix)) { 
       Add that word to the final results
 
     } else {
-      Don't include prefix, exclude that word, just ignore
+      Don't include prefix?, exclude that word, just ignore & loop
     }
-  
+  Return results words
 } else {
   Var empty = new Trie
   Return GetWords(empty)
@@ -46,4 +49,3 @@ Maybe not, we have already created the try as a constructor, Andra, and auto com
         t.learn("beginner");
         t.learn("beast");
       });
-
