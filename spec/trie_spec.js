@@ -39,17 +39,35 @@ describe("Trie", function() {
         var n = e.characters.g.characters.i.characters.n;
         expect(n.isWord).toBeTruthy();
       });
+      // it("learns a really long word after a shorter word", function(){
+      //   t.learn("begin");
+      //   t.learn("be");
+      //   t.learn("beginner");
+      //   var r = t.characters.b.characters.e.characters.g.characters.i.characters.n.characters.n.characters.e.characters.r;
+      //   expect(r.isWord).toBeTruthy();
+      // //   // console.log("r: ", r);
+      //   t.learn("cat");
+      //   t.learn("catatonic");
+      //   t.learn("beg");
+      //   var g = t.characters.b.characters.e.characters.g;
+      //   expect(g.isWord).toBeTruthy();
+      // });
     });
 
     describe(".find", function(){
-      it("returns falsy for a nonexistent string", function(){
+      it("returns falsy for a nonexistent string", function(){ //currently passes
+        t.learn("bell");
         expect(t.find("nope")).toBeFalsy();
       });
-      it("returns the right node for a string", function(){
+      it("returns the correct node for a string", function(){ // passes
         t.learn("b");
         expect(t.find("b")).toEqual(t.characters.b);
       });
-      it("returns the right node for a prefix", function(){
+      // it("returns the correct node for a string", function(){
+      //   t.learn("be");
+      //   expect(t.find("be")).toEqual(t.characters.b.characters.e);
+      // });
+      it("returns the correct node for a prefix", function(){  // passes
         t.learn("begin");
         expect(t.find("b")).toEqual(t.characters.b);
       });
@@ -63,7 +81,7 @@ describe("Trie", function() {
     });
 
     describe(".getWords", function(){
-      it("gets a child word", function(){
+      it("gets a child word", function(){ //passes
         t.learn("beast");
         expect(t.getWords()).toEqual(["beast"]);
       });
