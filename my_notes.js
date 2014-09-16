@@ -8,6 +8,16 @@ So somehow we need to set it up so that the passing in a try with no words in it
 
 So maybe you first called find on whatever you're given as auto complete, then find the term falls, the trial? Or I suppose if we use find, there are new results, or a false, then we just returned a new, empty try.
 
+Trie.find("a") returns false,
+So 
+if (Trie.find("a")){
+  Other case
+} else {
+  Var empty = new Trie
+  Return GetWords(empty)
+}
+
+
 
 If you want to play with the autocompleter.js you need to open your node console in terminal and set Autocompleter = require("./autocompleter.js"). Then you create a new instance of Autocompleter
 
