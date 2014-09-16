@@ -13,6 +13,13 @@ So
 if (Trie.find("a"/prefix)){
   Other case
   AllWordsInTrie = trie.GetWords
+  Test allwordintrie, do they include the prefix? Loop
+    If (include prefix) {
+      Add that word to the final results
+
+    } else {
+      Don't include prefix, exclude that word, just ignore
+    }
   
 } else {
   Var empty = new Trie
