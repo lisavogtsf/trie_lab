@@ -137,6 +137,10 @@ Trie.prototype.getWords = function(words, currentWord){
 
 Trie.prototype.autoComplete = function(prefix){
 
+	var allWordsInTrie = [];
+	var test = null;
+	var results = [];
+
 	if (prefix === undefined){
 		return false;
 	}
@@ -144,11 +148,27 @@ Trie.prototype.autoComplete = function(prefix){
 	if (this.find(prefix)){
 		// as long as the prefix is actually in the Trie
 		// get all the words in the trie
-		var allWordsInTrie = [];
-		allWordsInTrie = this.getWords(prefix);
-		for (var word in allWordsInTrie)
-		allWordsInTrie.forEach()
 
+		allWordsInTrie = this.getWords(prefix);
+		allWordsInTrie.forEach(
+			testTrie = new Trie();
+			testTrie.learn(WORD_IN_TRIE);
+			// find prefix in testTrie, word from all words
+			test = testTrie.find(prefix);
+			
+			if (test){
+				// prefix is in testTrie
+				// add WORD_IN_TRIE to results
+				results.push(WORD_IN_TRIE);
+				// return? no need to finish loop
+		
+			// if WORD_IN_Trie doesn't include prefix
+			// exclude that word, continue in loop
+
+			}
+		) // need to work on syntax of forEach
+
+		return results;
 
 	} else {
 		// prefix not found in Trie
