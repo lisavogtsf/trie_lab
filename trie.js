@@ -117,13 +117,14 @@ Trie.prototype.getWords = function(words, currentWord){
 	if (this.isWord){
 		// console.log("When found a word, this, ", this);
 		// console.log("When found a word, currentWord, ", currentWord);
-		// console.log("words, ", words);
+		console.log("words in getWords function, ", words);
 		words.push(currentWord);
+		console.log("words in getWords function, AFTER PUSH ", words);
 	} 
 	// console.log("made it to loop through characters, build currentWord ", currentWord);
 	// if it isn't a word already
 	for (var key in this.characters) {
-		console.log("key in loop, ",  key);
+		// console.log("key in loop, ",  key);
 		// console.log("currentword in loop, ", currentWord);
 		this.characters[key].getWords(words, currentWord + key);
 	}
@@ -138,35 +139,54 @@ Trie.prototype.getWords = function(words, currentWord){
 Trie.prototype.autoComplete = function(prefix){
 
 	var allWordsInTrie = [];
-	var test = null;
+	var testResult = null;
 	var results = [];
+	var testFcn = null;
+	var words = [];
+	var key = "";
 
 	if (prefix === undefined){
 		return false;
 	}
 
 	if (this.find(prefix)){
+		console.log("prefix, ", prefix);
+		console.log("allWordsInTrie, ", allWordsInTrie);
+
 		// as long as the prefix is actually in the Trie
 		// get all the words in the trie
+		allWordsInTrie = this.getWords(words, prefix);
 
-		allWordsInTrie = this.getWords(prefix);
-		allWordsInTrie.forEach(
+		// testFcn is the function that will be plugged into forEach
+		// testFcn creates a new Trie that learns each taco/word
+		// then testFcn tries to find the prefix in that testTrie
+		// if the prefix is in that test Trie then we want to 
+		// get taco out of this function and into the results array
+		// console.log("allWordsInTrie" , allWordsInTrie);
+		testFcn = function (taco){
+			console.log("taco in testfcn", taco);
 			testTrie = new Trie();
-			testTrie.learn(WORD_IN_TRIE);
-			// find prefix in testTrie, word from all words
-			test = testTrie.find(prefix);
+			testTrie.learn(taco);
+			// find prefix in testTrie, taco from all tacos
+			testResult = testTrie.find(prefix);
 			
-			if (test){
+			if (testResult){
 				// prefix is in testTrie
-				// add WORD_IN_TRIE to results
-				results.push(WORD_IN_TRIE);
+				// add taco_IN_TRIE to results
+				results.push(taco);
 				// return? no need to finish loop
 		
-			// if WORD_IN_Trie doesn't include prefix
-			// exclude that word, continue in loop
-
+				// if WORD_IN_Trie doesn't include prefix
+				// exclude that word, continue in loop
 			}
-		) // need to work on syntax of forEach
+		};
+
+		//where is this word coming from??
+		// word is just the key?
+		// for key in allWordsInTrie
+		// but we have an array here, so that doesn't work
+		// testFcn and word are both paramaters of forEach
+		allWordsInTrie.forEach(testFcn, key);
 
 		return results;
 
@@ -174,7 +194,7 @@ Trie.prototype.autoComplete = function(prefix){
 		// prefix not found in Trie
 		// return empty array 
 		var emptyTrie = new Trie();
-		return getWords(emptyTrie);
+		return emptyTrie.getWords();
 	}
 
 	// This function will return all completions 
